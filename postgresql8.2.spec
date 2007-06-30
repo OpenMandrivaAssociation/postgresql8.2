@@ -18,6 +18,8 @@
 %define current_major_version 8.2
 %define current_minor_version 4
 
+%define release %mkrel 2
+
 # For which mdv release this major is our default
 %define produce_devel 0
 %if %mdvver == 200800
@@ -33,8 +35,6 @@
 %if %mdvver <= 200800
 %define produce_client 1
 %endif 
-
-%define release %mkrel 1
 
 %define libname %mklibname pq %{major}
 %define libnamedevel %mklibname -d pq
