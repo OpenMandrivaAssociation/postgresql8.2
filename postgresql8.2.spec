@@ -241,6 +241,7 @@ package.
 Summary:	PostgreSQL development header files and libraries
 Group:		Development/Databases
 Requires:	%{name}-devel = %{version}-%{release}
+Conflicts:  %bname-devel <= 8.2.4-1mdv
 
 %description	-n %{bname}-devel
 The postgresql-devel package contains the header files and libraries
