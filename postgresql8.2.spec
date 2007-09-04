@@ -18,7 +18,7 @@
 %define current_major_version 8.2
 %define current_minor_version 4
 
-%define release %mkrel 2
+%define release %mkrel 3
 
 # For which mdv release this major is our default
 %define produce_devel 0
@@ -133,6 +133,7 @@ Group:		Development/C
 Requires:	%{libname} = %{version}-%{release}
 Provides:	postgresql-libs-devel = %{version}-%{release}
 Provides:   libpq-devel = %{version}-%{release}
+Provides:       pq-devel = %{version}-%{release}
 # Avoid conflicts with lib having bad major
 Conflicts:  libpq3-devel = 8.0.2
 Obsoletes:  %mklibname -d pq 5
