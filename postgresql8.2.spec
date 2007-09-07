@@ -18,7 +18,7 @@
 %define current_major_version 8.2
 %define current_minor_version 4
 
-%define release %mkrel 4
+%define release %mkrel 5
 
 # For which mdv release this major is our default
 %define produce_devel 0
