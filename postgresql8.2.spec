@@ -26,7 +26,7 @@
 %define produce_devel 1
 %endif
 # If major has not change during another release...
-%if %mdvver = 200810
+%if %mdvver == 200810
 %define produce_devel 1
 %endif
 
