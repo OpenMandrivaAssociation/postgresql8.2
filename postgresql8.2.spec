@@ -18,7 +18,7 @@
 %define current_major_version 8.2
 %define current_minor_version 5
 
-%define release %mkrel 3
+%define release %mkrel 4
 
 # For which mdv release this major is our default
 %define produce_devel 0
@@ -122,6 +122,7 @@ Provides:	postgresql-libs = %{version}-%{release}
 Provides:   libpq = %{version}-%{release}
 # Avoid conflicts with lib having bad major
 Conflicts:  libpq3 = 8.0.2
+Epoch: 1
 
 %description -n	%{libname}
 C and C++ libraries to enable user programs to communicate with the
@@ -131,13 +132,14 @@ accessed through TCP/IP.
 %package -n	%{libnamedevel}
 Summary:	Development library for libpq
 Group:		Development/C
-Requires:	%{libname} = %{version}-%{release}
+Requires:	%{libname} = 1:%{version}-%{release}
 Provides:	postgresql-libs-devel = %{version}-%{release}
 Provides:   libpq-devel = %{version}-%{release}
 Provides:       pq-devel = %{version}-%{release}
 # Avoid conflicts with lib having bad major
 Conflicts:  libpq3-devel = 8.0.2
 Obsoletes:  %mklibname -d pq 5
+Epoch: 1
 
 %description -n	%{libnamedevel}
 Development libraries for libpq
@@ -166,8 +168,8 @@ Development library to libecpg.
 Summary:	The programs needed to create and run a PostgreSQL server
 Group:		Databases
 Provides:	sqlserver
-Requires(post):   %{libname} >= %{version}-%{release}
-Requires(preun):   %{libname} >= %{version}-%{release}
+Requires(post):   %{libname} >= 1:%{version}-%{release}
+Requires(preun):   %{libname} >= 1:%{version}-%{release}
 # add/remove services
 Requires(post): rpm-helper
 Requires(preun): rpm-helper
