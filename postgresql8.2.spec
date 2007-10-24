@@ -18,7 +18,7 @@
 %define current_major_version 8.2
 %define current_minor_version 5
 
-%define release %mkrel 4
+%define release %mkrel 5
 
 # For which mdv release this major is our default
 %define produce_devel 0
@@ -135,7 +135,9 @@ Group:		Development/C
 Requires:	%{libname} = 1:%{version}-%{release}
 Provides:	postgresql-libs-devel = %{version}-%{release}
 Provides:   libpq-devel = %{version}-%{release}
-Provides:       pq-devel = %{version}-%{release}
+Conflicts:  libpq-devel > %{version}-%{release}
+Conflicts:  libpq-devel < %{version}-%{release}
+Provides:      pq-devel = %{version}-%{release}
 # Avoid conflicts with lib having bad major
 Conflicts:  libpq3-devel = 8.0.2
 Obsoletes:  %mklibname -d pq 5
@@ -149,6 +151,9 @@ Summary:	Shared library libecpg for PostgreSQL
 Group:		System/Libraries
 Requires:	postgresql%{current_major_version} = %{version}-%{release}
 Provides:	libecpg = %{version}-%{release}
+Provides:   %{_lib}ecpg%{major_ecpg} = %{version}-%{release}
+Conflicts:  %{_lib}ecpg%{major_ecpg} < %{version}-%{release}
+Conflicts:  %{_lib}ecpg%{major_ecpg} > %{version}-%{release}
 
 %description -n	%{libecpg}
 Libecpg is used by programs built with ecpg (Embedded PostgreSQL for C)
@@ -160,6 +165,9 @@ Group:		Development/C
 Requires:	%{libecpg} = %{version}-%{release}
 Provides:	libecpg-devel = %{version}-%{release} 
 Obsoletes:  %mklibname -d ecpg 5
+Provides:   %{_lib}ecpg%{major_ecpg}-devel = %{version}-%{release}
+Conflicts:  %{_lib}ecpg%{major_ecpg}-devel < %{version}-%{release}
+Conflicts:  %{_lib}ecpg%{major_ecpg}-devel > %{version}-%{release}
 
 %description -n	%{libecpgdevel}
 Development library to libecpg.
@@ -183,6 +191,7 @@ Provides: %{?arch_tagged:%arch_tagged %{bname}-server-ABI}%{?!arch_tagged:%{bnam
 Provides: %{bname}-server-virtual = %{version}-%{release}
 Conflicts: %{bname}-server-virtual < %{version}
 Conflicts: %{bname}-server-virtual > %{version}
+Provides: %{bname}-server = %{version}-%{release}
 
 %description	server
 The postgresql-server package includes the programs needed to create
