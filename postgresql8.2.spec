@@ -580,10 +580,10 @@ service postgresql start
 
 %_bindir/mdk_pg -r -i %{version}-%{release}
 
-%_post_service %{name}
+%_post_service %{bname}
 
 %preun server
-%_preun_service %{name}
+%_preun_service %{bname}
 
 %postun server
 /sbin/ldconfig
