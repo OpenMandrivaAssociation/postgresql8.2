@@ -18,7 +18,7 @@
 %define current_major_version 8.2
 %define current_minor_version 5
 
-%define release %mkrel 5
+%define release %mkrel 6
 
 # For which mdv release this major is our default
 %define produce_devel 0
@@ -235,7 +235,7 @@ the PostgreSQL tarball.  Selected contrib modules are prebuilt.
 Summary:	PostgreSQL development header files and libraries
 Group:		Development/Databases
 Requires:	postgresql%{current_major_version} = %{version}-%{release}
-Requires:   %{libnamedevel} = %{version}-%{release}
+Requires:   %{libnamedevel} = 1:%{version}-%{release}
 Requires:	%{libecpgdevel} = %{version}-%{release}
 Provides: %{bname}-devel-virtual = %{version}-%{release}
 Conflicts: %{bname}-devel-virtual < %{version}
