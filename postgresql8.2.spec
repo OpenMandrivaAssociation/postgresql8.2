@@ -18,7 +18,7 @@
 %define current_major_version 8.2
 %define current_minor_version 5
 
-%define release %mkrel 7
+%define release %mkrel 8
 
 # For which mdv release this major is our default
 %define produce_devel 0
@@ -193,6 +193,7 @@ Provides: %{bname}-server-virtual = %{version}-%{release}
 Conflicts: %{bname}-server-virtual < %{version}
 Conflicts: %{bname}-server-virtual > %{version}
 Provides: %{bname}-server = %{version}-%{release}
+Obsoletes: %{bname}-server < 8.2.4-2
 
 %description	server
 The postgresql-server package includes the programs needed to create
