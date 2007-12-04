@@ -62,7 +62,7 @@ Patch11:	postgresql-7.4.5-CAN-2005-0227.patch
 Requires:	perl
 Provides:	postgresql-clients
 Obsoletes:	postgresql-clients
-BuildRequires:	XFree86-devel bison flex gettext termcap-devel ncurses-devel openssl-devel
+BuildRequires:	X11-devel bison flex gettext termcap-devel ncurses-devel openssl-devel
 BuildRequires:	pam-devel perl-devel python-devel readline-devel >= 4.3 tk zlib-devel tcl
 BuildRequires:	tcl tcl-devel
 # should libedit0 be moved to main?
