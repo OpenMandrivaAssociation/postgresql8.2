@@ -67,7 +67,6 @@ BuildRequires:	pam-devel perl-devel python-devel readline-devel >= 4.3 tk zlib-d
 BuildRequires:	tcl tcl-devel
 # should libedit0 be moved to main?
 BuildConflicts:	edit-devel
-Buildroot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 Provides: %{bname}-virtual = %{version}-%{release}
 Conflicts: %{bname}-virtual < %{version}
 Conflicts: %{bname}-virtual > %{version}
