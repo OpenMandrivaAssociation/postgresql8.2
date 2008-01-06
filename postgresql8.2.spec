@@ -535,7 +535,7 @@ You just installed or update %{bname} server.
 You can found important informations about mandriva %{bname} rpms and database
 management in:
 
-%{_defaultdocdir}/%{name}-server-%{version}/postgresql.mdv.releasenote
+%{_defaultdocdir}/%{name}-server/postgresql.mdv.releasenote
 
 Please, read it.
 EOF
