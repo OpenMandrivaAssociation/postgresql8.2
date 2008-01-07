@@ -4,7 +4,6 @@
 %define _requires_exceptions devel(libtcl8.4)
 %endif
 
-%define pyver %(python -c 'import sys;print(sys.version[0:3])')
 %define perl_version %(rpm -q --qf "%{VERSION}" perl)
 %define perl_epoch %(rpm -q --qf "%{EPOCH}" perl)
 
@@ -16,9 +15,9 @@
 
 %define bname postgresql
 %define current_major_version 8.2
-%define current_minor_version 5
+%define current_minor_version 6
 
-%define release %mkrel 10
+%define release %mkrel 1
 
 # For which mdv release this major is our default
 %define produce_devel 0
