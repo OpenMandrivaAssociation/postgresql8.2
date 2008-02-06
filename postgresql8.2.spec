@@ -17,21 +17,17 @@
 %define current_major_version 8.2
 %define current_minor_version 6
 
-%define release %mkrel 3
+%define release %mkrel 4
 
 # For which mdv release this major is our default
 %define produce_devel 0
 %if %mdvver == 200800
 %define produce_devel 1
 %endif
-# If major has not change during another release...
-%if %mdvver == 200810
-%define produce_devel 1
-%endif
 
 # up to which mdv release this is hightest release
 %define produce_client 0
-%if %mdvver <= 200810
+%if %mdvver <= 200800
 %define produce_client 1
 %endif 
 
