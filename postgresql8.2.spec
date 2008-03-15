@@ -15,9 +15,9 @@
 
 %define bname postgresql
 %define current_major_version 8.2
-%define current_minor_version 6
+%define current_minor_version 7
 
-%define release %mkrel 6
+%define release %mkrel 1
 
 # For which mdv release this major is our default
 %define produce_devel 0
