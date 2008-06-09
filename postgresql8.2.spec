@@ -573,8 +573,7 @@ EOF
 
 %_bindir/mdk_pg -m -i %{version}-%{release}
 
-%post server
-/sbin/ldconfig
+%post server -p /sbin/ldconfig
 
 %posttrans server
 
