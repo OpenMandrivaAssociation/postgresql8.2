@@ -15,7 +15,7 @@
 
 %define bname postgresql
 %define current_major_version 8.2
-%define current_minor_version 7
+%define current_minor_version 9
 
 %define release %mkrel 1
 
