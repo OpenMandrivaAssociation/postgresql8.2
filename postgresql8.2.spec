@@ -86,6 +86,7 @@ If you want to manipulate a PostgreSQL database on a remote PostgreSQL
 server, you need this package. You also need to install this package
 if you're installing the postgresql-server package.
 
+%if %produce_client
 %package -n %{bname}
 Summary: 	PostgreSQL client programs and libraries
 Group:		Databases
@@ -108,6 +109,7 @@ managing PostgreSQL databases on a PostgreSQL server.
 If you want to manipulate a PostgreSQL database on a remote PostgreSQL
 server, you need this package. You also need to install this package
 if you're installing the postgresql-server package.
+%endif
 
 %package -n	%{libname}
 Summary:	The shared libraries required for any PostgreSQL clients
@@ -247,6 +249,7 @@ develop applications which will interact with a PostgreSQL server. If
 you're installing postgresql-server, you need to install this
 package.
 
+%if %produce_devel
 %package	-n %{bname}-devel
 Summary:	PostgreSQL development header files and libraries
 Group:		Development/Databases
@@ -261,6 +264,7 @@ Postgres preprocessor. You need to install this package if you want to
 develop applications which will interact with a PostgreSQL server. If
 you're installing postgresql-server, you need to install this
 package.
+%endif
 
 %package	pl
 Summary:	Procedurals languages for PostgreSQL
