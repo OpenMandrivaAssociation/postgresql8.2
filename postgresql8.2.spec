@@ -743,11 +743,7 @@ service postgresql start
 %{_datadir}/pgsql/system_views.sql
 %dir %{_libdir}/pgsql
 %dir %{_datadir}/pgsql
-%if %mdvver < 200900
-%attr(644,postgres,postgres) %config(noreplace) %{_localstatedir}/pgsql/.bashrc
-%else
-%attr(644,postgres,postgres) %config(noreplace) %{_localstatedir}/lib/pgsql/.bashrc
-%endif
+%attr(644,postgres,postgres) %config(noreplace) /var/lib/pgsql/.bashrc
 %attr(-,postgres,postgres) %{pgdata}/data
 %attr(700,postgres,postgres) %dir %{pgdata}/backups
 %{_libdir}/pgsql/*_and_*.so
