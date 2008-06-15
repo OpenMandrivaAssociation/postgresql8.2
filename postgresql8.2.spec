@@ -17,7 +17,7 @@
 %define current_major_version 8.2
 %define current_minor_version 9
 
-%define release %mkrel 1
+%define release %mkrel 2
 
 # For which mdv release this major is our default
 %define produce_devel 0
@@ -63,9 +63,9 @@ BuildRequires:	tcl tcl-devel
 # should libedit0 be moved to main?
 BuildConflicts:	edit-devel
 Buildroot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
-Provides: %{bname}-virtual = %{version}-%{release}
-Conflicts: %{bname}-virtual < %{version}
-Conflicts: %{bname}-virtual > %{version}
+Provides: %{bname}-virtual = %{current_major_version}
+Conflicts: %{bname}-virtual < %{current_major_version}
+Conflicts: %{bname}-virtual > %{current_major_version}
 Obsoletes: %{bname} < %{version}-%{release}
 
 %description
@@ -132,9 +132,9 @@ Group:		Development/C
 Requires:	%{libname} = 1:%{version}-%{release}
 Provides:	postgresql-libs-devel = %{version}-%{release}
 Provides:   libpq-devel = %{version}-%{release}
-Provides:   %{_lib}pq8.2-devel = %{version}-%{release}
-Conflicts:  %{_lib}pq8.2-devel > %{version}-%{release}
-Conflicts:  %{_lib}pq8.2-devel < %{version}-%{release}
+Provides:   %{_lib}pq8.2-devel = %{current_major_version}
+Conflicts:  %{_lib}pq8.2-devel > %{current_major_version}
+Conflicts:  %{_lib}pq8.2-devel < %{current_major_version}
 Provides:      pq-devel = %{version}-%{release}
 # Avoid conflicts with lib having bad major
 Conflicts:  libpq3-devel = 8.0.2
@@ -149,9 +149,9 @@ Summary:	Shared library libecpg for PostgreSQL
 Group:		System/Libraries
 Requires:	postgresql%{current_major_version} = %{version}-%{release}
 Provides:	libecpg = %{version}-%{release}
-Provides:   %{_lib}ecpg%{major_ecpg} = %{version}-%{release}
-Conflicts:  %{_lib}ecpg%{major_ecpg} < %{version}-%{release}
-Conflicts:  %{_lib}ecpg%{major_ecpg} > %{version}-%{release}
+Provides:   %{_lib}ecpg%{major_ecpg} = %{current_major_version}
+Conflicts:  %{_lib}ecpg%{major_ecpg} < %{current_major_version}
+Conflicts:  %{_lib}ecpg%{major_ecpg} > %{current_major_version}
 
 %description -n	%{libecpg}
 Libecpg is used by programs built with ecpg (Embedded PostgreSQL for C)
@@ -163,9 +163,9 @@ Group:		Development/C
 Requires:	%{libecpg} = %{version}-%{release}
 Provides:	libecpg-devel = %{version}-%{release} 
 Obsoletes:  %mklibname -d ecpg 5
-Provides:   %{_lib}ecpg%{major_ecpg}-devel = %{version}-%{release}
-Conflicts:  %{_lib}ecpg%{major_ecpg}-devel < %{version}-%{release}
-Conflicts:  %{_lib}ecpg%{major_ecpg}-devel > %{version}-%{release}
+Provides:   %{_lib}ecpg%{major_ecpg}-devel = %{current_major_version}
+Conflicts:  %{_lib}ecpg%{major_ecpg}-devel < %{current_major_version}
+Conflicts:  %{_lib}ecpg%{major_ecpg}-devel > %{current_major_version}
 
 %description -n	%{libecpgdevel}
 Development library to libecpg.
@@ -186,9 +186,9 @@ Requires(pre):	postgresql%{current_major_version} >= %{version}-%{release}
 Requires(post):	postgresql%{current_major_version} >= %{version}-%{release}
 Conflicts:	postgresql < 7.3
 Provides: %{?arch_tagged:%arch_tagged %{bname}-server-ABI}%{?!arch_tagged:%{bname}-server-ABI} = %{current_major_version}
-Provides: %{bname}-server-virtual = %{version}-%{release}
-Conflicts: %{bname}-server-virtual < %{version}
-Conflicts: %{bname}-server-virtual > %{version}
+Provides: %{bname}-server-virtual = %{current_major_version}
+Conflicts: %{bname}-server-virtual < %{current_major_version}
+Conflicts: %{bname}-server-virtual > %{current_major_version}
 Provides: %{bname}-server = %{version}-%{release}
 Obsoletes: %{bname}-server < 8.2.4-2
 
@@ -208,9 +208,9 @@ After installing this package, please read postgresql.mdv.releasenote.
 %package	docs
 Summary:	Extra documentation for PostgreSQL
 Group:		Databases
-Provides: %{bname}-docs-virtual = %{version}-%{release}
-Conflicts: %{bname}-docs-virtual < %{version}
-Conflicts: %{bname}-docs-virtual > %{version}
+Provides: %{bname}-docs-virtual = %{current_major_version}
+Conflicts: %{bname}-docs-virtual < %{current_major_version}
+Conflicts: %{bname}-docs-virtual > %{current_major_version}
 
 %description	docs
 The postgresql-docs package includes the SGML source for the documentation
@@ -222,9 +222,9 @@ project, or if you want to generate printed documentation.
 Summary:	Contributed binaries distributed with PostgreSQL
 Group:		Databases
 Requires:   postgresql%{current_major_version}-server = %{version}-%{release}
-Provides: %{bname}-contrib-virtual = %{version}-%{release}
-Conflicts: %{bname}-contrib-virtual < %{version}
-Conflicts: %{bname}-contrib-virtual > %{version}
+Provides: %{bname}-contrib-virtual = %{current_major_version}
+Conflicts: %{bname}-contrib-virtual < %{current_major_version}
+Conflicts: %{bname}-contrib-virtual > %{current_major_version}
 
 %description	contrib
 The postgresql-contrib package includes the contrib tree distributed with
@@ -236,9 +236,9 @@ Group:		Development/Databases
 Requires:	postgresql%{current_major_version} = %{version}-%{release}
 Requires:   %{libnamedevel} = 1:%{version}-%{release}
 Requires:	%{libecpgdevel} = %{version}-%{release}
-Provides: %{bname}-devel-virtual = %{version}-%{release}
-Conflicts: %{bname}-devel-virtual < %{version}
-Conflicts: %{bname}-devel-virtual > %{version}
+Provides: %{bname}-devel-virtual = %{current_major_version}
+Conflicts: %{bname}-devel-virtual < %{current_major_version}
+Conflicts: %{bname}-devel-virtual > %{current_major_version}
 
 %description	devel
 The postgresql-devel package contains the header files and libraries
@@ -274,9 +274,9 @@ Requires:	%{name}-plpython = %{version}-%{release}
 Requires:	%{name}-plperl = %{version}-%{release} 
 Requires:	%{name}-pltcl = %{version}-%{release} 
 Requires:	%{name}-plpgsql = %{version}-%{release} 
-Provides: %{bname}-pl-virtual = %{version}-%{release}
-Conflicts: %{bname}-pl-virtual < %{version}
-Conflicts: %{bname}-pl-virtual > %{version}
+Provides: %{bname}-pl-virtual = %{current_major_version}
+Conflicts: %{bname}-pl-virtual < %{current_major_version}
+Conflicts: %{bname}-pl-virtual > %{current_major_version}
 Obsoletes: %{bname}-pl
 Provides:  %{bname}-pl = %{version}-%{release}
 
@@ -292,9 +292,9 @@ Group:      Databases
 Requires:   postgresql%{current_major_version}-server = %{version}
 Conflicts:  postgresql-pl < %version-%release
 Requires: %{?arch_tagged:%arch_tagged %{bname}-server-ABI}%{?!arch_tagged:%{bname}-server-ABI} = %{current_major_version}
-Provides: %{bname}-plpython-virtual = %{version}-%{release}
-Conflicts: %{bname}-plpython-virtual < %{version}
-Conflicts: %{bname}-plpython-virtual > %{version}
+Provides: %{bname}-plpython-virtual = %{current_major_version}
+Conflicts: %{bname}-plpython-virtual < %{current_major_version}
+Conflicts: %{bname}-plpython-virtual > %{current_major_version}
 Obsoletes: %{bname}-plpython
 Provides:  %{bname}-plpython = %{version}-%{release}
 
@@ -312,9 +312,9 @@ Requires:   postgresql%{current_major_version}-server = %{version}
 Requires:   perl-base = %{perl_epoch}:%{perl_version}
 Conflicts:  postgresql-pl < %version-%release
 Requires: %{?arch_tagged:%arch_tagged %{bname}-server-ABI}%{?!arch_tagged:%{bname}-server-ABI} = %{current_major_version}
-Provides: %{bname}-plperl-virtual = %{version}-%{release}
-Conflicts: %{bname}-plperl-virtual < %{version}
-Conflicts: %{bname}-plperl-virtual > %{version}
+Provides: %{bname}-plperl-virtual = %{current_major_version}
+Conflicts: %{bname}-plperl-virtual < %{current_major_version}
+Conflicts: %{bname}-plperl-virtual > %{current_major_version}
 Obsoletes: %{bname}-plperl
 Provides:  %{bname}-plperl = %{version}-%{release}
 
@@ -330,9 +330,9 @@ Group:      Databases
 Requires:   postgresql%{current_major_version}-server = %{version}
 Conflicts:  postgresql-pl < %version-%release
 Requires: %{?arch_tagged:%arch_tagged %{bname}-server-ABI}%{?!arch_tagged:%{bname}-server-ABI} = %{current_major_version}
-Provides: %{bname}-pltcl-virtual = %{version}-%{release}
-Conflicts: %{bname}-pltcl-virtual < %{version}
-Conflicts: %{bname}-pltcl-virtual > %{version}
+Provides: %{bname}-pltcl-virtual = %{current_major_version}
+Conflicts: %{bname}-pltcl-virtual < %{current_major_version}
+Conflicts: %{bname}-pltcl-virtual > %{current_major_version}
 Obsoletes: %{bname}-pltcl
 Provides:  %{bname}-pltcl = %{version}-%{release}
 
@@ -349,9 +349,9 @@ Group:      Databases
 Requires:   postgresql%{current_major_version}-server = %{version}
 Conflicts:  postgresql-pl < %version-%release
 Requires: %{?arch_tagged:%arch_tagged %{bname}-server-ABI}%{?!arch_tagged:%{bname}-server-ABI} = %{current_major_version}
-Provides: %{bname}-plpgsql-virtual = %{version}-%{release}
-Conflicts: %{bname}-plpgsql-virtual < %{version}
-Conflicts: %{bname}-plpgsql-virtual > %{version}
+Provides: %{bname}-plpgsql-virtual = %{current_major_version}
+Conflicts: %{bname}-plpgsql-virtual < %{current_major_version}
+Conflicts: %{bname}-plpgsql-virtual > %{current_major_version}
 Obsoletes: %{bname}-plpgsql
 Provides:  %{bname}-plpgsql = %{version}-%{release}
 
@@ -366,9 +366,9 @@ Summary:	The test suite distributed with PostgreSQL
 Group:		Databases
 Requires:	%{name} >= %{version}-%{release}
 Requires:	%{name}-pl = %{version}-%{release}
-Provides: %{bname}-test-virtual = %{version}-%{release}
-Conflicts: %{bname}-test-virtual < %{version}
-Conflicts: %{bname}-test-virtual > %{version}
+Provides: %{bname}-test-virtual = %{current_major_version}
+Conflicts: %{bname}-test-virtual < %{current_major_version}
+Conflicts: %{bname}-test-virtual > %{current_major_version}
 
 %description	test
 PostgreSQL is an advanced Object-Relational database management
