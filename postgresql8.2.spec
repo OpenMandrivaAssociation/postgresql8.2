@@ -17,7 +17,7 @@
 %define current_major_version 8.2
 %define current_minor_version 9
 
-%define release %mkrel 2
+%define release %mkrel 3
 
 # For which mdv release this major is our default
 %define produce_devel 0
@@ -132,9 +132,9 @@ Group:		Development/C
 Requires:	%{libname} = 1:%{version}-%{release}
 Provides:	postgresql-libs-devel = %{version}-%{release}
 Provides:   libpq-devel = %{version}-%{release}
-Provides:   %{_lib}pq8.2-devel = %{current_major_version}
-Conflicts:  %{_lib}pq8.2-devel > %{current_major_version}
-Conflicts:  %{_lib}pq8.2-devel < %{current_major_version}
+Provides:   %{libnamedevel}-virtual = %{current_major_version}
+Conflicts:  %{libnamedevel}-virtual > %{current_major_version}
+Conflicts:  %{libnamedevel}-virtual < %{current_major_version}
 Provides:      pq-devel = %{version}-%{release}
 # Avoid conflicts with lib having bad major
 Conflicts:  libpq3-devel = 8.0.2
@@ -149,9 +149,9 @@ Summary:	Shared library libecpg for PostgreSQL
 Group:		System/Libraries
 Requires:	postgresql%{current_major_version} = %{version}-%{release}
 Provides:	libecpg = %{version}-%{release}
-Provides:   %{_lib}ecpg%{major_ecpg} = %{current_major_version}
-Conflicts:  %{_lib}ecpg%{major_ecpg} < %{current_major_version}
-Conflicts:  %{_lib}ecpg%{major_ecpg} > %{current_major_version}
+Provides:   %{libecpg}-virtual = %{current_major_version}
+Conflicts:  %{libecpg}-virtual < %{current_major_version}
+Conflicts:  %{libecpg}-virtual > %{current_major_version}
 
 %description -n	%{libecpg}
 Libecpg is used by programs built with ecpg (Embedded PostgreSQL for C)
@@ -163,9 +163,9 @@ Group:		Development/C
 Requires:	%{libecpg} = %{version}-%{release}
 Provides:	libecpg-devel = %{version}-%{release} 
 Obsoletes:  %mklibname -d ecpg 5
-Provides:   %{_lib}ecpg%{major_ecpg}-devel = %{current_major_version}
-Conflicts:  %{_lib}ecpg%{major_ecpg}-devel < %{current_major_version}
-Conflicts:  %{_lib}ecpg%{major_ecpg}-devel > %{current_major_version}
+Provides:   %{libecpgdevel}-virtual = %{current_major_version}
+Conflicts:  %{libecpgdevel}-virtual < %{current_major_version}
+Conflicts:  %{libecpgdevel}-virtual > %{current_major_version}
 
 %description -n	%{libecpgdevel}
 Development library to libecpg.
