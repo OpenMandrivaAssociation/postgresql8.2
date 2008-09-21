@@ -15,9 +15,9 @@
 
 %define bname postgresql
 %define current_major_version 8.2
-%define current_minor_version 9
+%define current_minor_version 10
 
-%define release %mkrel 3
+%define release %mkrel 1
 
 # For which mdv release this major is our default
 %define produce_devel 0
@@ -66,7 +66,7 @@ Buildroot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 Provides: %{bname}-virtual = %{current_major_version}
 Conflicts: %{bname}-virtual < %{current_major_version}
 Conflicts: %{bname}-virtual > %{current_major_version}
-Obsoletes: %{bname} < %{version}-%{release}
+Provides:  %{bname} = %{version}-%{release}
 
 %description
 PostgreSQL is an advanced Object-Relational database management system
@@ -85,31 +85,6 @@ managing PostgreSQL databases on a PostgreSQL server.
 If you want to manipulate a PostgreSQL database on a remote PostgreSQL
 server, you need this package. You also need to install this package
 if you're installing the postgresql-server package.
-
-%if %produce_client
-%package -n %{bname}
-Summary: 	PostgreSQL client programs and libraries
-Group:		Databases
-Requires:   %{name} = %{version}-%{release}
-
-%description -n %{bname}
-PostgreSQL is an advanced Object-Relational database management system
-(DBMS) that supports almost all SQL constructs (including
-transactions, subselects and user-defined types and functions). The
-postgresql package includes the client programs and libraries that
-you'll need to access a PostgreSQL DBMS server.  These PostgreSQL
-client programs are programs that directly manipulate the internal
-structure of PostgreSQL databases on a PostgreSQL server. These client
-programs can be located on the same machine with the PostgreSQL
-server, or may be on a remote machine which accesses a PostgreSQL
-server over a network connection. This package contains the client
-libraries for C and C++, as well as command-line utilities for
-managing PostgreSQL databases on a PostgreSQL server. 
-
-If you want to manipulate a PostgreSQL database on a remote PostgreSQL
-server, you need this package. You also need to install this package
-if you're installing the postgresql-server package.
-%endif
 
 %package -n	%{libname}
 Summary:	The shared libraries required for any PostgreSQL clients
@@ -239,6 +214,7 @@ Requires:	%{libecpgdevel} = %{version}-%{release}
 Provides: %{bname}-devel-virtual = %{current_major_version}
 Conflicts: %{bname}-devel-virtual < %{current_major_version}
 Conflicts: %{bname}-devel-virtual > %{current_major_version}
+Provides:  %{bname}-devel = %{version}-%{release}
 
 %description	devel
 The postgresql-devel package contains the header files and libraries
@@ -248,23 +224,6 @@ Postgres preprocessor. You need to install this package if you want to
 develop applications which will interact with a PostgreSQL server. If
 you're installing postgresql-server, you need to install this
 package.
-
-%if %produce_devel
-%package	-n %{bname}-devel
-Summary:	PostgreSQL development header files and libraries
-Group:		Development/Databases
-Requires:	%{name}-devel = %{version}-%{release}
-Conflicts:  %bname-devel <= 8.2.4-1mdv
-
-%description	-n %{bname}-devel
-The postgresql-devel package contains the header files and libraries
-needed to compile C or C++ applications which will directly interact
-with a PostgreSQL database management server and the ecpg Embedded C
-Postgres preprocessor. You need to install this package if you want to
-develop applications which will interact with a PostgreSQL server. If
-you're installing postgresql-server, you need to install this
-package.
-%endif
 
 %package	pl
 Summary:	Procedurals languages for PostgreSQL
@@ -655,10 +614,6 @@ service postgresql start
 %config(noreplace) %_sysconfdir/sysconfig/mdkpg
 %_sys_macros_dir/%{name}.macros
 
-%if %produce_client
-%files -n %{bname}
-%endif
-
 %files -n %{libname} 
 %defattr(-,root,root)
 %{_libdir}/libpq.so.%{major}*
@@ -781,10 +736,6 @@ service postgresql start
 %{_mandir}/man1/ecpg.1*
 %{_bindir}/pg_config
 %{_mandir}/man1/pg_config.1*
-
-%if %produce_devel
-%files -n %{bname}-devel
-%endif
 
 %files pl 
 %defattr(-,root,root) 
