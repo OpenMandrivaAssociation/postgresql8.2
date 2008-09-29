@@ -17,7 +17,7 @@
 %define current_major_version 8.2
 %define current_minor_version 10
 
-%define release %mkrel 2
+%define release %mkrel 3
 
 # For which mdv release this major is our default
 %define produce_devel 0
@@ -55,8 +55,8 @@ Source13:	postgresql.mdv.releasenote
 Patch9:		postgresql-7.4.1-pkglibdir.diff
 Patch11:	postgresql-7.4.5-CAN-2005-0227.patch
 Requires:	perl
-Provides:	postgresql-clients
-Obsoletes:	postgresql-clients
+Provides:	postgresql-clients < %{version}-%{release}
+Conflicts:	postgresql-clients = %{version}-%{release}
 BuildRequires:	X11-devel bison flex gettext termcap-devel ncurses-devel openssl-devel
 BuildRequires:	pam-devel perl-devel python-devel readline-devel >= 4.3 tk zlib-devel tcl
 BuildRequires:	tcl tcl-devel
@@ -66,7 +66,7 @@ Buildroot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 Provides: %{bname}-virtual = %{current_major_version}
 Conflicts: %{bname}-virtual < %{current_major_version}
 Conflicts: %{bname}-virtual > %{current_major_version}
-Obsoletes: %{bname} < %{version}-%{release}
+Conflicts: %{bname} < %{version}-%{release}
 
 %description
 PostgreSQL is an advanced Object-Relational database management system
@@ -114,7 +114,7 @@ if you're installing the postgresql-server package.
 %package -n	%{libname}
 Summary:	The shared libraries required for any PostgreSQL clients
 Group:		System/Libraries
-Obsoletes:	postgresql-libs
+Conflicts:	postgresql-libs < %{version}-%{release}
 Provides:	postgresql-libs = %{version}-%{release}
 Provides:   libpq = %{version}-%{release}
 # Avoid conflicts with lib having bad major
@@ -138,7 +138,7 @@ Conflicts:  %{libnamedevel}-virtual < %{current_major_version}
 Provides:      pq-devel = %{version}-%{release}
 # Avoid conflicts with lib having bad major
 Conflicts:  libpq3-devel = 8.0.2
-Obsoletes:  %mklibname -d pq 5
+Conflicts:  %mklibname -d pq 5
 Epoch: 1
 
 %description -n	%{libnamedevel}
@@ -162,7 +162,7 @@ Summary:	Development library to libecpg
 Group:		Development/C
 Requires:	%{libecpg} = %{version}-%{release}
 Provides:	libecpg-devel = %{version}-%{release} 
-Obsoletes:  %mklibname -d ecpg 5
+Conflicts:  %mklibname -d ecpg 5
 Provides:   %{libecpgdevel}-virtual = %{current_major_version}
 Conflicts:  %{libecpgdevel}-virtual < %{current_major_version}
 Conflicts:  %{libecpgdevel}-virtual > %{current_major_version}
@@ -190,7 +190,7 @@ Provides: %{bname}-server-virtual = %{current_major_version}
 Conflicts: %{bname}-server-virtual < %{current_major_version}
 Conflicts: %{bname}-server-virtual > %{current_major_version}
 Provides: %{bname}-server = %{version}-%{release}
-Obsoletes: %{bname}-server < 8.2.4-2
+Conflicts: %{bname}-server < 8.2.4-2
 
 %description	server
 The postgresql-server package includes the programs needed to create
@@ -269,7 +269,7 @@ package.
 %package	pl
 Summary:	Procedurals languages for PostgreSQL
 Group:		Databases
-Obsoletes:	libpgsql2
+Conflicts:	libpgsql2
 Requires:	%{name}-plpython = %{version}-%{release} 
 Requires:	%{name}-plperl = %{version}-%{release} 
 Requires:	%{name}-pltcl = %{version}-%{release} 
