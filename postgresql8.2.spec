@@ -15,9 +15,9 @@
 
 %define bname postgresql
 %define current_major_version 8.2
-%define current_minor_version 10
+%define current_minor_version 11
 
-%define release %mkrel 4
+%define release %mkrel 1
 
 %define libname %mklibname pq %{major}
 %define libnamedevel %mklibname -d pq
