@@ -17,7 +17,7 @@
 %define current_major_version 8.2
 %define current_minor_version 11
 
-%define release %mkrel 1
+%define release %mkrel 2
 
 %define libname %mklibname pq %{major}
 %define libnamedevel %mklibname -d pq
