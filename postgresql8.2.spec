@@ -4,6 +4,8 @@
 %define _requires_exceptions devel(libtcl8.4)
 %endif
 
+%define _default_patch_fuzz 1
+
 %define perl_version %(rpm -q --qf "%{VERSION}" perl)
 %define perl_epoch %(rpm -q --qf "%{EPOCH}" perl)
 
@@ -17,7 +19,7 @@
 %define current_major_version 8.2
 %define current_minor_version 11
 
-%define release %mkrel 2
+%define release %mkrel 3
 
 %define libname %mklibname pq %{major}
 %define libnamedevel %mklibname -d pq
@@ -41,7 +43,7 @@ Source11:	postgresql.init
 Source12:	postgresql-mdk-%{mdk_pg_ver}.tar.bz2
 Source13:	postgresql.mdv.releasenote
 Patch9:		postgresql-7.4.1-pkglibdir.diff
-Patch11:	postgresql-7.4.5-CAN-2005-0227.patch
+Patch11:	postgresql.fmtchk.patch
 Requires:	perl
 Provides:	postgresql-clients < %{version}-%{release}
 Conflicts:	postgresql-clients = %{version}-%{release}
@@ -331,8 +333,7 @@ system, including regression tests and benchmarks.
 
 %patch9 -p0 -b .pkglibdir
 
-%patch11 -p1 -b .can-2005-0227
-#%patch13 -p1 -b .can-2005-0246
+%patch11 -p0 -b .fmtchk
 
 %setup -n %{bname}-%{version} -a12 -T -D -q
 
