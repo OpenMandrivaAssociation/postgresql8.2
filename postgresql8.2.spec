@@ -17,9 +17,9 @@
 
 %define bname postgresql
 %define current_major_version 8.2
-%define current_minor_version 11
+%define current_minor_version 12
 
-%define release %mkrel 3
+%define release %mkrel 1
 
 %define libname %mklibname pq %{major}
 %define libnamedevel %mklibname -d pq
@@ -50,8 +50,7 @@ Conflicts:	postgresql-clients = %{version}-%{release}
 BuildRequires:	X11-devel bison flex gettext termcap-devel ncurses-devel openssl-devel
 BuildRequires:	pam-devel perl-devel python-devel readline-devel >= 4.3 tk zlib-devel tcl
 BuildRequires:	tcl tcl-devel
-# should libedit0 be moved to main?
-BuildConflicts:	edit-devel
+BuildRequires:	edit-devel
 Buildroot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 Provides: %{bname}-virtual = %{current_major_version}
 Conflicts: %{bname}-virtual < %{current_major_version}
@@ -338,27 +337,6 @@ system, including regression tests and benchmarks.
 %setup -n %{bname}-%{version} -a12 -T -D -q
 
 %build
-
-pushd src
-#(deush) if libtool exist, copy some files 
-if [ -d %{_datadir}/libtool ]
-then
-   cp %{_datadir}/libtool/config.* .
-fi
-
-# doesn't build on PPC with full optimization (sb)
-%ifnarch ppc
-CFLAGS="${CFLAGS:-$RPM_OPT_FLAGS}" ; export CFLAGS
-CXXFLAGS="${CXXFLAGS:-$RPM_OPT_FLAGS}" ; export CXXFLAGS
-%endif
-
-#fix -ffast-math problem (deush)
-%ifnarch ppc
-%serverbuild
-CFLAGS=`echo $RPM_OPT_FLAGS|xargs -n 1|grep -v ffast-math|xargs -n 100`
-%endif
-popd
-
 %configure --disable-rpath \
             --enable-hba \
 	    --enable-locale \
