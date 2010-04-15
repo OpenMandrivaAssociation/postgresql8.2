@@ -17,7 +17,7 @@
 
 %define bname postgresql
 %define current_major_version 8.2
-%define current_minor_version 15
+%define current_minor_version 16
 
 %define release %mkrel 1
 
@@ -337,7 +337,7 @@ system, including regression tests and benchmarks.
 %setup -n %{bname}-%{version} -a12 -T -D -q
 
 %build
-%configure --disable-rpath \
+%configure2_5x --disable-rpath \
             --enable-hba \
 	    --enable-locale \
 	    --enable-multibyte \
