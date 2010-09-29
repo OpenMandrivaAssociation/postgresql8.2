@@ -19,7 +19,7 @@
 %define current_major_version 8.2
 %define current_minor_version 17
 
-%define release %mkrel 4
+%define release %mkrel 5
 
 %define libname %mklibname pq %{major}
 %define libnamedevel %mklibname -d pq
@@ -54,7 +54,6 @@ BuildRequires:	edit-devel
 Buildroot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 Provides: %{bname}-virtual = %{current_major_version}
 Conflicts: %{bname}-virtual < %{current_major_version}
-Conflicts: %{bname}-virtual > %{current_major_version}
 Conflicts: %{bname} < %{version}-%{release}
 Provides:  %{bname} = %{version}-%{release}
 
@@ -98,7 +97,6 @@ Requires:	%{libname} = 1:%{version}-%{release}
 Provides:	postgresql-libs-devel = %{version}-%{release}
 Provides:   libpq-devel = %{version}-%{release}
 Provides:   %{libnamedevel}-virtual = %{current_major_version}
-Conflicts:  %{libnamedevel}-virtual > %{current_major_version}
 Conflicts:  %{libnamedevel}-virtual < %{current_major_version}
 Provides:      pq-devel = %{version}-%{release}
 # Avoid conflicts with lib having bad major
@@ -116,7 +114,6 @@ Requires:	postgresql%{current_major_version} = %{version}-%{release}
 Provides:	libecpg = %{version}-%{release}
 Provides:   %{libecpg}-virtual = %{current_major_version}
 Conflicts:  %{libecpg}-virtual < %{current_major_version}
-Conflicts:  %{libecpg}-virtual > %{current_major_version}
 
 %description -n	%{libecpg}
 Libecpg is used by programs built with ecpg (Embedded PostgreSQL for C)
@@ -130,7 +127,6 @@ Provides:	libecpg-devel = %{version}-%{release}
 Conflicts:  %mklibname -d ecpg 5
 Provides:   %{libecpgdevel}-virtual = %{current_major_version}
 Conflicts:  %{libecpgdevel}-virtual < %{current_major_version}
-Conflicts:  %{libecpgdevel}-virtual > %{current_major_version}
 
 %description -n	%{libecpgdevel}
 Development library to libecpg.
@@ -153,7 +149,6 @@ Conflicts:	postgresql < 7.3
 Provides: %{?arch_tagged:%arch_tagged %{bname}-server-ABI}%{?!arch_tagged:%{bname}-server-ABI} = %{current_major_version}
 Provides: %{bname}-server-virtual = %{current_major_version}
 Conflicts: %{bname}-server-virtual < %{current_major_version}
-Conflicts: %{bname}-server-virtual > %{current_major_version}
 Provides: %{bname}-server = %{version}-%{release}
 Conflicts: %{bname}-server < 8.2.4-2
 
@@ -175,7 +170,6 @@ Summary:	Extra documentation for PostgreSQL
 Group:		Databases
 Provides: %{bname}-docs-virtual = %{current_major_version}
 Conflicts: %{bname}-docs-virtual < %{current_major_version}
-Conflicts: %{bname}-docs-virtual > %{current_major_version}
 
 %description	docs
 The postgresql-docs package includes the SGML source for the documentation
@@ -189,7 +183,6 @@ Group:		Databases
 Requires:   postgresql%{current_major_version}-server = %{version}-%{release}
 Provides: %{bname}-contrib-virtual = %{current_major_version}
 Conflicts: %{bname}-contrib-virtual < %{current_major_version}
-Conflicts: %{bname}-contrib-virtual > %{current_major_version}
 
 %description	contrib
 The postgresql-contrib package includes the contrib tree distributed with
@@ -203,7 +196,6 @@ Requires:   %{libnamedevel} = 1:%{version}-%{release}
 Requires:	%{libecpgdevel} = %{version}-%{release}
 Provides: %{bname}-devel-virtual = %{current_major_version}
 Conflicts: %{bname}-devel-virtual < %{current_major_version}
-Conflicts: %{bname}-devel-virtual > %{current_major_version}
 Provides: %bname-devel = %{version}-%{release}
 Conflicts: %bname-devel < %{version}-%{release}
 
@@ -226,7 +218,6 @@ Requires:	%{name}-pltcl = %{version}-%{release}
 Requires:	%{name}-plpgsql = %{version}-%{release} 
 Provides: %{bname}-pl-virtual = %{current_major_version}
 Conflicts: %{bname}-pl-virtual < %{current_major_version}
-Conflicts: %{bname}-pl-virtual > %{current_major_version}
 Conflicts: %{bname}-pl < %{version}-%{release}
 Provides:  %{bname}-pl = %{version}-%{release}
 
@@ -244,7 +235,6 @@ Conflicts:  postgresql-pl < %version-%release
 Requires: %{?arch_tagged:%arch_tagged %{bname}-server-ABI}%{?!arch_tagged:%{bname}-server-ABI} = %{current_major_version}
 Provides: %{bname}-plpython-virtual = %{current_major_version}
 Conflicts: %{bname}-plpython-virtual < %{current_major_version}
-Conflicts: %{bname}-plpython-virtual > %{current_major_version}
 Conflicts: %{bname}-plpython < %{version}-%{release}
 Provides:  %{bname}-plpython = %{version}-%{release}
 
@@ -264,7 +254,6 @@ Conflicts:  postgresql-pl < %version-%release
 Requires: %{?arch_tagged:%arch_tagged %{bname}-server-ABI}%{?!arch_tagged:%{bname}-server-ABI} = %{current_major_version}
 Provides: %{bname}-plperl-virtual = %{current_major_version}
 Conflicts: %{bname}-plperl-virtual < %{current_major_version}
-Conflicts: %{bname}-plperl-virtual > %{current_major_version}
 Conflicts: %{bname}-plperl < %{version}-%{release}
 Provides:  %{bname}-plperl = %{version}-%{release}
 
@@ -282,7 +271,6 @@ Conflicts:  postgresql-pl < %version-%release
 Requires: %{?arch_tagged:%arch_tagged %{bname}-server-ABI}%{?!arch_tagged:%{bname}-server-ABI} = %{current_major_version}
 Provides: %{bname}-pltcl-virtual = %{current_major_version}
 Conflicts: %{bname}-pltcl-virtual < %{current_major_version}
-Conflicts: %{bname}-pltcl-virtual > %{current_major_version}
 Conflicts: %{bname}-pltcl < %{version}-%{release}
 Provides:  %{bname}-pltcl = %{version}-%{release}
 
@@ -301,7 +289,6 @@ Conflicts:  postgresql-pl < %version-%release
 Requires: %{?arch_tagged:%arch_tagged %{bname}-server-ABI}%{?!arch_tagged:%{bname}-server-ABI} = %{current_major_version}
 Provides: %{bname}-plpgsql-virtual = %{current_major_version}
 Conflicts: %{bname}-plpgsql-virtual < %{current_major_version}
-Conflicts: %{bname}-plpgsql-virtual > %{current_major_version}
 Conflicts: %{bname}-plpgsql < %{version}-%{release}
 Provides:  %{bname}-plpgsql = %{version}-%{release}
 
@@ -318,7 +305,6 @@ Requires:	%{name} >= %{version}-%{release}
 Requires:	%{name}-pl = %{version}-%{release}
 Provides: %{bname}-test-virtual = %{current_major_version}
 Conflicts: %{bname}-test-virtual < %{current_major_version}
-Conflicts: %{bname}-test-virtual > %{current_major_version}
 
 %description	test
 PostgreSQL is an advanced Object-Relational database management
