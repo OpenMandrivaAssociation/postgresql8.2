@@ -19,7 +19,7 @@
 %define current_major_version 8.2
 %define current_minor_version 18
 
-%define release %mkrel 4
+%define release %mkrel 5
 
 %define libname %mklibname pq %{major}
 %define libnamedevel %mklibname -d pq
@@ -33,6 +33,7 @@ Summary: 	PostgreSQL client programs and libraries
 Name:		%{bname}%{current_major_version}
 Version: 	%{current_major_version}.%{current_minor_version}
 Release: 	%release
+Epoch:		1
 License:	BSD
 Group:		Databases
 URL:		http://www.postgresql.org/ 
@@ -45,15 +46,16 @@ Source13:	postgresql.mdv.releasenote
 Patch9:		postgresql-7.4.1-pkglibdir.diff
 Patch11:	postgresql.fmtchk.patch
 Requires:	perl
-Provides:	postgresql-clients < %{version}-%{release}
+Provides:	postgresql-clients = %{version}-%{release}
 BuildRequires:	X11-devel bison flex gettext termcap-devel ncurses-devel openssl-devel
 BuildRequires:	pam-devel perl-devel python-devel readline-devel >= 4.3 tk zlib-devel tcl
 BuildRequires:	tcl tcl-devel
 BuildRequires:	edit-devel
 Buildroot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
-Provides: %{bname}-virtual = %{current_major_version}
-Conflicts: %{bname}-virtual < %{current_major_version}
-Provides:  %{bname} = %{version}-%{release}
+Provides:	%{bname}-virtual = %{current_major_version}
+Conflicts:	%{bname}-virtual < %{current_major_version}
+Provides:	%{bname} = %{version}-%{release}
+Requires:	%{libname} = %{version}
 
 %description
 PostgreSQL is an advanced Object-Relational database management system
@@ -77,10 +79,10 @@ if you're installing the postgresql-server package.
 Summary:	The shared libraries required for any PostgreSQL clients
 Group:		System/Libraries
 Provides:	postgresql-libs = %{version}-%{release}
-Provides:   libpq = %{version}-%{release}
+Provides:	libpq = %{version}-%{release}
+Conflicts:	libpq <= %{current_major_version}
 # Avoid conflicts with lib having bad major
 Conflicts:  libpq3 = 8.0.2
-Epoch: 1
 
 %description -n	%{libname}
 C and C++ libraries to enable user programs to communicate with the
@@ -90,7 +92,7 @@ accessed through TCP/IP.
 %package -n	%{libnamedevel}
 Summary:	Development library for libpq
 Group:		Development/C
-Requires:	%{libname} = 1:%{version}-%{release}
+Requires:	%{libname} = %{EVRD}
 Provides:	postgresql-libs-devel = %{version}-%{release}
 Provides:   libpq-devel = %{version}-%{release}
 Provides:   %{libnamedevel}-virtual = %{current_major_version}
@@ -99,7 +101,6 @@ Provides:      pq-devel = %{version}-%{release}
 # Avoid conflicts with lib having bad major
 Conflicts:  libpq3-devel = 8.0.2
 Conflicts:  %mklibname -d pq 5
-Epoch: 1
 
 %description -n	%{libnamedevel}
 Development libraries for libpq
@@ -109,8 +110,8 @@ Summary:	Shared library libecpg for PostgreSQL
 Group:		System/Libraries
 Requires:	postgresql%{current_major_version} = %{version}-%{release}
 Provides:	libecpg = %{version}-%{release}
-Provides:   %{libecpg}-virtual = %{current_major_version}
-Conflicts:  %{libecpg}-virtual < %{current_major_version}
+Conflicts:	libecpg < %{current_major_version}
+Provides:	%{libecpg}-virtual = %{current_major_version}
 
 %description -n	%{libecpg}
 Libecpg is used by programs built with ecpg (Embedded PostgreSQL for C)
@@ -121,9 +122,9 @@ Summary:	Development library to libecpg
 Group:		Development/C
 Requires:	%{libecpg} = %{version}-%{release}
 Provides:	libecpg-devel = %{version}-%{release} 
-Conflicts:  %mklibname -d ecpg 5
-Provides:   %{libecpgdevel}-virtual = %{current_major_version}
-Conflicts:  %{libecpgdevel}-virtual < %{current_major_version}
+Conflicts:	%mklibname -d ecpg 5
+Provides:	%{libecpgdevel}-virtual = %{current_major_version}
+Conflicts:	%{libecpgdevel}-virtual < %{current_major_version}
 
 %description -n	%{libecpgdevel}
 Development library to libecpg.
@@ -132,8 +133,8 @@ Development library to libecpg.
 Summary:	The programs needed to create and run a PostgreSQL server
 Group:		Databases
 Provides:	sqlserver
-Requires(post):   %{libname} >= 1:%{version}-%{release}
-Requires(preun):   %{libname} >= 1:%{version}-%{release}
+Requires(post):   %{libname} >= %{EVRD}
+Requires(preun):   %{libname} >= %{EVRD}
 # add/remove services
 Requires(post): rpm-helper
 Requires(preun): rpm-helper
@@ -165,8 +166,8 @@ After installing this package, please read postgresql.mdv.releasenote.
 %package	docs
 Summary:	Extra documentation for PostgreSQL
 Group:		Databases
-Provides: %{bname}-docs-virtual = %{current_major_version}
-Conflicts: %{bname}-docs-virtual < %{current_major_version}
+Provides:	%{bname}-docs-virtual = %{current_major_version}
+Conflicts:	%{bname}-docs-virtual < %{current_major_version}
 
 %description	docs
 The postgresql-docs package includes the SGML source for the documentation
@@ -177,9 +178,9 @@ project, or if you want to generate printed documentation.
 %package	contrib
 Summary:	Contributed binaries distributed with PostgreSQL
 Group:		Databases
-Requires:   postgresql%{current_major_version}-server = %{version}-%{release}
-Provides: %{bname}-contrib-virtual = %{current_major_version}
-Conflicts: %{bname}-contrib-virtual < %{current_major_version}
+Requires:	postgresql%{current_major_version}-server = %{version}-%{release}
+Provides:	%{bname}-contrib-virtual = %{current_major_version}
+Conflicts:	%{bname}-contrib-virtual < %{current_major_version}
 
 %description	contrib
 The postgresql-contrib package includes the contrib tree distributed with
@@ -189,11 +190,11 @@ the PostgreSQL tarball.  Selected contrib modules are prebuilt.
 Summary:	PostgreSQL development header files and libraries
 Group:		Development/Databases
 Requires:	postgresql%{current_major_version} = %{version}-%{release}
-Requires:   %{libnamedevel} = 1:%{version}-%{release}
+Requires:	%{libnamedevel} = %{EVRD}
 Requires:	%{libecpgdevel} = %{version}-%{release}
-Provides: %{bname}-devel-virtual = %{current_major_version}
-Conflicts: %{bname}-devel-virtual < %{current_major_version}
-Provides: %bname-devel = %{version}-%{release}
+Provides:	%{bname}-devel-virtual = %{current_major_version}
+Conflicts:	%{bname}-devel-virtual < %{current_major_version}
+Provides:	%{bname}-devel = %{version}-%{release}
 
 %description	devel
 The postgresql-devel package contains the header files and libraries
@@ -212,9 +213,9 @@ Requires:	%{name}-plpython = %{version}-%{release}
 Requires:	%{name}-plperl = %{version}-%{release} 
 Requires:	%{name}-pltcl = %{version}-%{release} 
 Requires:	%{name}-plpgsql = %{version}-%{release} 
-Provides: %{bname}-pl-virtual = %{current_major_version}
-Conflicts: %{bname}-pl-virtual < %{current_major_version}
-Provides:  %{bname}-pl = %{version}-%{release}
+Provides:	%{bname}-pl-virtual = %{current_major_version}
+Conflicts:	%{bname}-pl-virtual < %{current_major_version}
+Provides:	%{bname}-pl = %{version}-%{release}
 
 %description	pl
 PostgreSQL is an advanced Object-Relational database management
@@ -225,11 +226,11 @@ PL/Pgsql is part of the core server package.
 %package    plpython
 Summary:    The PL/Python procedural language for PostgreSQL
 Group:      Databases
-Requires:   postgresql%{current_major_version}-server = %{version}
-Requires: %{?arch_tagged:%arch_tagged %{bname}-server-ABI}%{?!arch_tagged:%{bname}-server-ABI} = %{current_major_version}
-Provides: %{bname}-plpython-virtual = %{current_major_version}
-Conflicts: %{bname}-plpython-virtual < %{current_major_version}
-Provides:  %{bname}-plpython = %{version}-%{release}
+Requires:	postgresql%{current_major_version}-server = %{version}
+Requires:	%{?arch_tagged:%arch_tagged %{bname}-server-ABI}%{?!arch_tagged:%{bname}-server-ABI} = %{current_major_version}
+Provides:	%{bname}-plpython-virtual = %{current_major_version}
+Conflicts:	%{bname}-plpython-virtual < %{current_major_version}
+Provides:	%{bname}-plpython = %{version}-%{release}
 
 %description	plpython
 PostgreSQL is an advanced Object-Relational database management
