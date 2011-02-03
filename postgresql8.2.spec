@@ -19,7 +19,7 @@
 %define current_major_version 8.2
 %define current_minor_version 18
 
-%define release %mkrel 5
+%define release %mkrel 6
 
 %define libname %mklibname pq %{major}
 %define libnamedevel %mklibname -d pq
@@ -47,10 +47,16 @@ Patch9:		postgresql-7.4.1-pkglibdir.diff
 Patch11:	postgresql.fmtchk.patch
 Requires:	perl
 Provides:	postgresql-clients = %{version}-%{release}
-BuildRequires:	X11-devel bison flex gettext termcap-devel ncurses-devel openssl-devel
-BuildRequires:	pam-devel perl-devel python-devel readline-devel >= 4.3 tk zlib-devel tcl
-BuildRequires:	tcl tcl-devel
-BuildRequires:	edit-devel
+BuildRequires:	bison flex
+BuildRequires:	openssl-devel
+BuildRequires:	pam-devel
+BuildRequires:	perl-devel
+BuildRequires:	python-devel
+BuildRequires:	readline-devel
+BuildRequires:	tcl-devel
+BuildRequires:	libxml2-devel
+BuildRequires:	libxslt-devel
+BuildRequires:	zlib-devel
 Buildroot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 Provides:	%{bname}-virtual = %{current_major_version}
 Conflicts:	%{bname}-virtual < %{current_major_version}
