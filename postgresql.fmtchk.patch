@@ -1,0 +1,39 @@
+Index: src/bin/psql/describe.c
+===================================================================
+--- src/bin/psql/describe.c
++++ src/bin/psql/describe.c	2008-12-25 19:47:07.186149299 +0100
+@@ -1229,7 +1229,7 @@
+ 									 footers, &count_footers, tmpbuf, false))
+ 				{
+ 					appendPQExpBuffer(&buf, ", ");
+-					appendPQExpBuffer(&buf, tmpbuf.data);
++					appendPQExpBuffer(&buf, "%s", tmpbuf.data);
+ 
+ 					count_footers -= 2;
+ 				}
+Index: src/backend/utils/misc/guc.c
+===================================================================
+--- src/backend/utils/misc/guc.c
++++ src/backend/utils/misc/guc.c	2008-12-25 19:41:09.729148973 +0100
+@@ -4146,7 +4146,7 @@
+ 								(errcode(ERRCODE_INVALID_PARAMETER_VALUE),
+ 								 errmsg("invalid value for parameter \"%s\": \"%s\"",
+ 										name, value),
+-								 hintmsg ? errhint(hintmsg) : 0));
++								 hintmsg ? errhint("%s", hintmsg) : 0));
+ 						return false;
+ 					}
+ 					if (newval < conf->min || newval > conf->max)
+Index: src/backend/tcop/utility.c
+===================================================================
+--- src/backend/tcop/utility.c
++++ src/backend/tcop/utility.c	2008-12-25 19:38:31.527148894 +0100
+@@ -127,7 +127,7 @@
+ 	ereport(ERROR,
+ 			(errcode(ERRCODE_WRONG_OBJECT_TYPE),
+ 			 errmsg(rentry->nota_msg, relname),
+-			 (wentry->kind != '\0') ? errhint(wentry->drophint_msg) : 0));
++			 (wentry->kind != '\0') ? errhint("%s", wentry->drophint_msg) : 0));
+ }
+ 
+ /*

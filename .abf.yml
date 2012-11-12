@@ -1,0 +1,6 @@
+sources:
+  "postgresql-8.2.21.tar.bz2:"	32d2eca495d988c9ed9513743a5c65b70087ca0f
+  "postgresql-8.2.21.tar.bz2.md5:"	c7fde211cb3d88ec48f4efe6f448f64b78fb7576
+  "postgresql.init:"	a7ea00f68f8b8353db1e68d30e9030cd37df687f
+  "postgresql-mdk-1.9.tar.bz2:"	86541527bc8b2e190bfcd9ba6ad74550ee847f22
+  "postgresql.mdv.releasenote:"	8051a2161b3547c4325934849d017023852b9a1d

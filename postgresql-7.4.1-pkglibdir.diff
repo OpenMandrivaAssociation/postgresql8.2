@@ -1,0 +1,20 @@
+--- src/Makefile.global.in	2003-12-20 00:29:29.000000000 +0100
++++ src/Makefile.global.in.oden	2004-06-08 14:40:07.761970494 +0200
+@@ -87,7 +87,7 @@
+ pkglibdir = $(libdir)
+ ifeq "$(findstring pgsql, $(pkglibdir))" ""
+ ifeq "$(findstring postgres, $(pkglibdir))" ""
+-override pkglibdir := $(pkglibdir)/postgresql
++override pkglibdir := $(pkglibdir)/pgsql
+ endif
+ endif
+ 
+@@ -95,7 +95,7 @@
+ pkgincludedir = $(includedir)
+ ifeq "$(findstring pgsql, $(pkgincludedir))" ""
+ ifeq "$(findstring postgres, $(pkgincludedir))" ""
+-override pkgincludedir := $(pkgincludedir)/postgresql
++override pkgincludedir := $(pkgincludedir)/pgsql
+ endif
+ endif
+ includedir_server = $(pkgincludedir)/server
