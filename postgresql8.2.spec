@@ -36,7 +36,7 @@ Release: 	%release
 Epoch:		1
 License:	BSD
 Group:		Databases
-URL:		http://www.postgresql.org/ 
+URL:		https://www.postgresql.org/ 
 Source0:	ftp://ftp.postgresql.org/pub/source/v%{version}/postgresql-%{version}.tar.bz2
 Source5:	ftp://ftp.postgresql.orga/pub/source/v%{version}/postgresql-%{version}.tar.bz2.md5
 Source11:	postgresql.init
