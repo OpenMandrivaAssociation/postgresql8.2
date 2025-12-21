@@ -47,6 +47,11 @@ Patch9:		postgresql-7.4.1-pkglibdir.diff
 Patch11:	postgresql.fmtchk.patch
 Requires:	perl
 Provides:	postgresql-clients = %{version}-%{release}
+BuildRequires:	autoconf
+BuildRequires:	automake
+BuildRequires:	libtool-base
+BuildRequires:	slibtool
+BuildRequires:	make
 BuildRequires:	bison flex
 BuildRequires:	openssl-devel
 BuildRequires:	pam-devel
